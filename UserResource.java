@@ -19,20 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @Path("/user")
 public class UserResource {
-	@GET
-	@Path("/getUser/{FirstName}/{LastName}")
-	@Produces({MediaType.APPLICATION_JSON})
-	public static User getString(){
-		return new User("Robert", "Barathéon");
-	}
-	
-	@POST
-	@Path("/setFirstName")
-	@Consumes({MediaType.APPLICATION_JSON})
-	public static void setFirstN(String firstName){
-		User cerseiL = getString();
-	}
-	
 	@POST
 	@Path("/addUser/{FirstName}/{LastName}")
 	public Response addUser(@Context ServletContext context, @Context HttpServletRequest request, @PathParam("firstname") String firstName, @PathParam("lastname") String lastName) {
@@ -44,11 +30,39 @@ public class UserResource {
 		
 		return Response.seeOther(uri).build();
 	}
+	
 	@GET
 	@Path("/JsonList")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List <User> jsonList(){
 		return MongoDB.getAllContacts();
+	}
+	
+	@GET
+	@Path("/getUser/{ID}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getUser(@Context ServletContext context, @Context HttpServletRequest request, @PathParam("ID") String ID) {
+		MongoDB.deleteContact(ID);
+		URI uri = UriBuilder.fromUri(URI.create(request.getContextPath()))
+				.path("index.jsp")
+				.build();
+		context.setAttribute("message", "delete a contact");
+		
+		return Response.seeOther(uri).build();
+	}
+	
+	@GET
+	@Path("/modifyUser/{ID}/{firstName}/{lastName}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response modifyUser(@Context ServletContext context, @Context HttpServletRequest request, @PathParam("ID") String ID, @PathParam("firstname") String firstName, @PathParam("lastname") String lastName) {
+		User user = new User(ID, firstName, lastName);
+		MongoDB.modifyUser(ID, user);
+		URI uri = UriBuilder.fromUri(URI.create(request.getContextPath()))
+				.path("index.jsp")
+				.build();
+		context.setAttribute("message", "modify a contact");
+		
+		return Response.seeOther(uri).build();
 	}
 	
 }
