@@ -38,7 +38,7 @@ public class UserResource {
 		return MongoDB.getAllContacts();
 	}
 	
-	@GET
+	@POST
 	@Path("/deleteUser/{ID}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteUser(@Context ServletContext context, @Context HttpServletRequest request, @PathParam("ID") String ID) {
@@ -51,7 +51,7 @@ public class UserResource {
 		return Response.seeOther(uri).build();
 	}
 	
-	@GET
+	@POST
 	@Path("/modifyUser/{ID}/{firstName}/{lastName}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response modifyUser(@Context ServletContext context, @Context HttpServletRequest request, @PathParam("ID") String ID, @PathParam("firstname") String firstName, @PathParam("lastname") String lastName) {
