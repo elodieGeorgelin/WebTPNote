@@ -39,9 +39,9 @@ public class UserResource {
 	}
 	
 	@GET
-	@Path("/getUser/{ID}")
+	@Path("/deleteUser/{ID}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getUser(@Context ServletContext context, @Context HttpServletRequest request, @PathParam("ID") String ID) {
+	public Response deleteUser(@Context ServletContext context, @Context HttpServletRequest request, @PathParam("ID") String ID) {
 		MongoDB.deleteContact(ID);
 		URI uri = UriBuilder.fromUri(URI.create(request.getContextPath()))
 				.path("index.jsp")
