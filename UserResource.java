@@ -26,7 +26,7 @@ public class UserResource {
 	}
 	
 	@POST
-	@Path("/addUser{FirstName}/{LastName}")
+	@Path("/addUser/{FirstName}/{LastName}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public static void addUser(User user) {
 		MongoDB.addContact(new User(@PathParam("FirstName"), @PathParam("LastName")));
