@@ -20,8 +20,8 @@ public class MongoDB {
 	public static void addContact (User user) {
 		MongoClient mongoClient = new MongoClient();
 		try {
-		    MongoDatabase db = mongoClient.getDatabase("Database");
-		    MongoCollection<Document> collection = db.getCollection("Users");
+		    MongoDatabase db = mongoClient.getDatabase(DATABASE);
+		    MongoCollection<Document> collection = db.getCollection(COLLECTION_CONTACTS);
 
 		    ObjectMapper mapper = new ObjectMapper();
 		    String jsonString = mapper.writeValueAsString(user);
@@ -37,8 +37,8 @@ public class MongoDB {
 	public static void deleteContact (String ID) {
 		MongoClient mongoClient = new MongoClient();
 		try {
-			MongoDatabase db = mongoClient.getDatabase("Database");
-		    MongoCollection<Document> collection = db.getCollection("Users");
+			MongoDatabase db = mongoClient.getDatabase(DATABASE);
+		    MongoCollection<Document> collection = db.getCollection(COLLECTION_CONTACTS);
 		    
 		    BasicDBObject filter = new BasicDBObject().append("id", ID);
 		    collection.deleteOne(filter);
@@ -54,8 +54,8 @@ public class MongoDB {
 		MongoClient mongoClient = new MongoClient();
 		User user = new User();
 		try {
-			MongoDatabase db = mongoClient.getDatabase("Database");
-		    MongoCollection<Document> collection = db.getCollection("Users");
+			MongoDatabase db = mongoClient.getDatabase(DATABASE);
+		    MongoCollection<Document> collection = db.getCollection(COLLECTION_CONTACTS);
 		    
 		    BasicDBObject filter = new BasicDBObject().append("id", ID);
 		    Document doc = collection.find(filter).first();
@@ -98,4 +98,24 @@ public class MongoDB {
 		return list;
 	}
 	
+	public static void modifyUser(String ID, User user) {
+		MongoClient mongoClient = new MongoClient();
+		try {
+			MongoDatabase db = mongoClient.getDatabase(DATABASE);
+			MongoCollection<Document> collection = db.getCollection(COLLECTION_CONTACTS);
+
+			BasicDBObject filter = new BasicDBObject().append("id", ID);
+			collection.deleteOne(filter);
+			
+			ObjectMapper mapper = new ObjectMapper();
+		    String jsonString = mapper.writeValueAsString(new User(ID, user.getFirstName(), user.getLastName()));
+		    Document doc = Document.parse(jsonString);
+		    collection.insertOne(doc);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			mongoClient.close();
+		}
+	}
+
 }
