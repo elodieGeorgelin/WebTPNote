@@ -1,15 +1,22 @@
 package com.example;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import org.bson.Document;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoCursor;
 
 public class MongoDB {
 	
+	public static final String DATABASE = "usersData";
+	public static final String COLLECTION_CONTACTS = "contacts";
 	public static void addContact (User user) {
 		MongoClient mongoClient = new MongoClient();
 		try {
@@ -62,6 +69,33 @@ public class MongoDB {
 			mongoClient.close();
 		}
 		return user;
+	}
+	
+	public static List<User> getAllContacts() {
+		List<User> list = new ArrayList<User>();
+		
+		MongoClient mongoClient = new MongoClient();
+		try {
+		    MongoDatabase db = mongoClient.getDatabase(DATABASE);
+		    MongoCollection<Document> collection = db.getCollection(COLLECTION_CONTACTS);
+		    // perform read operation on the collection
+	        FindIterable<Document> fi = collection.find();
+	        MongoCursor<Document> cursor = fi.iterator();
+	        try {
+	        	while(cursor.hasNext()) {
+	        		Document o = cursor.next();
+	        		User user = new User((String) o.get("id"), (String) o.get("First Name"), (String) o.get("Last Name"));
+	        		list.add(user);
+	        	}
+	        } finally {
+	        	cursor.close();
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			mongoClient.close();
+		}
+		return list;
 	}
 	
 }
