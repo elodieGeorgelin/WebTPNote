@@ -29,11 +29,11 @@ public class UserResource {
 	@Path("/addUser{FirstName}/{LastName}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public static void addUser(User user) {
-		MongoDB.addContact(user);
+		MongoDB.addContact(new User(@PathParam("FirstName"), @PathParam("LastName")));
 	}
 	@GET
 	@Path("/JsonList")
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public List <User> jsonList(){
 		return MongoDB.getAllContacts();
 	}
