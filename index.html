@@ -179,7 +179,7 @@
   </head>
   <body>
   <h1>UserManagement Tool</h1>
-    <div class="app-desc">Permet de gerer un carnet d'adresses</div>
+    <div class="app-desc">Permet de gérer un carnet de contact</div>
     <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
     <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
     <div class="app-desc">Version: 0.1</div>
@@ -198,7 +198,7 @@
   <li><a href="#projectWebapiUserAddUserFirstNameLastnameGet"><code><span class="http-method">get</span> /Project/webapi/user/addUser/firstName/Lastname</code></a></li>
   <li><a href="#projectWebapiUserDeleteUserIdPost"><code><span class="http-method">post</span> /Project/webapi/user/deleteUser/id</code></a></li>
   <li><a href="#projectWebapiUserJsonListGet"><code><span class="http-method">get</span> /Project/webapi/user/JsonList</code></a></li>
-  <li><a href="#projectWebapiUserModifyUserIdFirstnameLastNamePost"><code><span class="http-method">post</span> /Project/webapi/user/modifyUser/id/firstname/lastName</code></a></li>
+  <li><a href="#projectWebapiUserModifyUserIdFirstNameLastNamePost"><code><span class="http-method">post</span> /Project/webapi/user/modifyUser/id/firstName/lastName</code></a></li>
   </ul>
 
   <h1><a name="Default">Default</a></h1>
@@ -207,7 +207,7 @@
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /Project/webapi/user/addUser/firstName/Lastname</code></pre></div>
     <div class="method-summary"> (<span class="nickname">projectWebapiUserAddUserFirstNameLastnameGet</span>)</div>
-    <div class="method-notes">ajoute un utlisateur dont le nom et prenom est passé en paramètre</div>
+    <div class="method-notes">ajoute un utlisateur dont le nom et prenom sont passés en paramètres</div>
 
 
 
@@ -227,6 +227,9 @@
     <h4 class="field-label">201</h4>
     created
         <a href="#"></a>
+    <h4 class="field-label">405</h4>
+    Method Not Allowed
+        <a href="#"></a>
   </div> <!-- method -->
   <hr/>
   <div class="method"><a name="projectWebapiUserDeleteUserIdPost"></a>
@@ -234,7 +237,7 @@
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /Project/webapi/user/deleteUser/id</code></pre></div>
     <div class="method-summary"> (<span class="nickname">projectWebapiUserDeleteUserIdPost</span>)</div>
-    <div class="method-notes">fonction permettant de supprimer l&#x27;user dont l&#x27;id est passé en parametre</div>
+    <div class="method-notes">fonction permettant de supprimer l&#x27;user dont l&#x27;identifiant est passé en paramètre</div>
 
 
 
@@ -251,6 +254,9 @@
     <h4 class="field-label">200</h4>
     l&#x27;user a bien été supprimé
         <a href="#"></a>
+    <h4 class="field-label">405</h4>
+    Method Not Allowed
+        <a href="#"></a>
   </div> <!-- method -->
   <hr/>
   <div class="method"><a name="projectWebapiUserJsonListGet"></a>
@@ -258,7 +264,7 @@
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /Project/webapi/user/JsonList</code></pre></div>
     <div class="method-summary"> (<span class="nickname">projectWebapiUserJsonListGet</span>)</div>
-    <div class="method-notes">génere une liste json de tout les utilisateurs</div>
+    <div class="method-notes">génère une liste json de tous les utilisateurs</div>
 
 
 
@@ -275,14 +281,20 @@
     <h4 class="field-label">200</h4>
     Json créé
         <a href="#"></a>
+    <h4 class="field-label">201</h4>
+    Created
+        <a href="#"></a>
+    <h4 class="field-label">405</h4>
+    Method Not Allowed
+        <a href="#"></a>
   </div> <!-- method -->
   <hr/>
-  <div class="method"><a name="projectWebapiUserModifyUserIdFirstnameLastNamePost"></a>
+  <div class="method"><a name="projectWebapiUserModifyUserIdFirstNameLastNamePost"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
-    <pre class="post"><code class="huge"><span class="http-method">post</span> /Project/webapi/user/modifyUser/id/firstname/lastName</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">projectWebapiUserModifyUserIdFirstnameLastNamePost</span>)</div>
-    <div class="method-notes">modifie l&#x27;utilisateur dont l&#x27;id est passé en parametre par le nouveau nom et prenom passés eux aussi en parametres</div>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /Project/webapi/user/modifyUser/id/firstName/lastName</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">projectWebapiUserModifyUserIdFirstNameLastNamePost</span>)</div>
+    <div class="method-notes">modifie l&#x27;utilisateur dont l&#x27;id est passé en paramètre par le nouveau nom et prenom passés eux aussi en paramètres</div>
 
 
 
@@ -301,6 +313,9 @@
         <a href="#"></a>
     <h4 class="field-label">201</h4>
     Created
+        <a href="#"></a>
+    <h4 class="field-label">405</h4>
+    Method Not Allowed
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
